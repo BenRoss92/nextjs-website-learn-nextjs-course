@@ -1,3 +1,6 @@
+// @ts-ignore: side-effect import of CSS without type declarations
+import '@/app/ui/global.css';
+
 export default function RootLayout({
   children,
 }: {

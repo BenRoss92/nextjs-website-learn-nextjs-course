@@ -6,6 +6,7 @@ import {
   useRouter,
   useSearchParams
 } from 'next/navigation';
+import { useDebounce, useDebouncedCallback } from "use-debounce";
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const pathname = usePathname()
@@ -14,7 +15,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
 
   const { replace } = useRouter();
 
-  function handleSearch(term: string): void {
+  const handleSearch = useDebouncedCallback((term: string) => {
+    console.log(`Searching...${term}`);
+
     const params = new URLSearchParams(searchParams);
 
     if (term) {
@@ -24,7 +27,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     }
 
     replace(`${pathname}?${params.toString()}`)
-  }
+  }, 300);
 
   return (
     <div className="relative flex flex-1 flex-shrink-0">

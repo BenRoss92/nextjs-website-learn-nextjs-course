@@ -68,3 +68,13 @@ export async function updateInvoice(id: string, formData: FormData) {
     // Redirect the user to the invoices homepage so they can see the updated table
     redirect('/dashboard/invoices')
 }
+
+export async function deleteInvoice(id: string) {
+    await sql`
+        DELETE FROM invoices
+        WHERE id = ${id}
+    `;
+
+    // See the newest data after deleting an invoice from the table
+    revalidatePath('/dashboard/invoices')
+}

@@ -160,6 +160,11 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
+    // Use for testing out what happens when we 
+    // try to hit the /edit route for an invoice that 
+    // doesn't exist
+    console.log('invoice', invoice);
+
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
